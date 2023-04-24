@@ -38,3 +38,49 @@ public class ServiceTests
         Assert.That(service.GetInfo(), Is.EqualTo(expectedInfo));
     }
 }
+[TestFixture]
+public class CarDepotTests
+{
+    CarDepot depot;
+    [SetUp]
+    public void Setup()
+    {
+        depot = new CarDepot("TTT", new List<string>(){"работа1", "робта2", "работа3"}, 23);
+    }
+    [Test]
+    public void ConstructorDepotTests()
+    {
+        Assert.That(depot.Title, Is.EqualTo("TTT"));
+        Assert.That(depot.WorkList, Is.EqualTo(new List<string>(){"работа1", "робта2", "работа3"}));
+        Assert.That(depot.Capacity, Is.EqualTo(23));
+    }
+    [Test]
+    public void GetInfoCarDepotTest()
+    {
+        var expected = "Название депо: TTT\nСписок работ: работа1\nробта2\nработа3\nВместимость депо: 23";
+        Assert.That(depot.GetInfo(), Is.EqualTo(expected));
+    }
+}
+[TestFixture]
+public class LocomotiveDepotTests
+{
+    LocomotiveDepot locoDepot;
+    [SetUp]
+    public void Setup()
+    {
+        locoDepot = new LocomotiveDepot("rrr", new List<string>(){"work1", "work2", "work3"}, LocoType.ElectroLoco);
+    }
+    [Test]
+    public void ConstructorLocoDepotTest()
+    {
+        Assert.That(locoDepot.Title, Is.EqualTo("rrr"));
+        Assert.That(locoDepot.WorkList, Is.EqualTo(new List<string>(){"work1", "work2", "work3"}));
+        Assert.That(locoDepot.Locomotive, Is.EqualTo(LocoType.ElectroLoco));
+    }
+    [Test]
+    public void GetInfoLocomotiveDepotTest()
+    {
+        var expected = "Название депо: rrr\nСписок работ: work1\nwork2\nwork3\nТип ремонтируемого локомотива: электровоз";
+        Assert.That(locoDepot.GetInfo(), Is.EqualTo(expected));
+    }
+}
