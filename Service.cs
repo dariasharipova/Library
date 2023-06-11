@@ -6,7 +6,7 @@ public enum RepairType
     Regular,
     Prevention
 }
-public class Service
+public class Service: IComparable<Service>
 {
     public readonly int ServiceNumber;
     public int CarNumber;
@@ -36,6 +36,13 @@ public class Service
         EndDate = DateTime.Now;
         Duration = EndDate - StartDate;
     }
+    public int CompareTo(Service other)
+    {
+        if(StartDate != other.StartDate)
+            return StartDate.CompareTo(other.StartDate);
+        else
+            return WorkDescription.CompareTo(other.WorkDescription);
+    }
     public string GetInfo()
     {
         var repair = "";
@@ -62,6 +69,7 @@ public abstract class Depot
     {
         Title = depotTitle;
         WorkList = depotWorkList;
+        WorkList.Sort();
     }
     public abstract string GetInfo();
 }
