@@ -65,20 +65,24 @@ public abstract class Depot
 {
     public string Title;
     public List<Service> WorkList; 
-    public Depot(string depotTitle, List<Service> depotWorkList)
+    public Depot(string depotTitle, IEnumerable<Service> depotWorkList)
     {
         Title = depotTitle;
-        WorkList = depotWorkList;
+        WorkList =new List<Service>(depotWorkList.Distinct());
         WorkList.Sort();
     }
+    public IEnumerator<Service> GetEnumerator() => WorkList.GetEnumerator();
+    // IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public abstract string GetInfo();
 }
 public class CarDepot : Depot
 {
     public readonly int Capacity;
+    public readonly int CarCount; //readonly не позволяет изменять количетво работ не создавая депо заново
     public CarDepot(string depotTitle, List<Service> depotWorkList, int depotCapacity) : base(depotTitle, depotWorkList)
     {
         Capacity = depotCapacity;
+        CarCount = WorkList.Count; 
     }
     public override string GetInfo()
     {
@@ -87,7 +91,7 @@ public class CarDepot : Depot
         {
             list += $"{element.WorkDescription}\n";
         }
-        return $"Название депо: {Title}" +$"\nСписок работ: {list}" + $"Вместимость депо: {Capacity}";
+        return $"Название депо: {Title}\nСписок работ: {list}\nВместимость депо: {Capacity}\nКоличество вагонов на ремонте: {CarCount}";
     }
 }
 public enum LocoType
