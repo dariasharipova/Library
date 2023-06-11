@@ -1,12 +1,12 @@
 ﻿using System;
 namespace RWMaintenance;
-enum RepairType
+public enum RepairType
 {
     Urgent,
     Regular,
     Prevention
 }
-class Service
+public class Service
 {
     public readonly int ServiceNumber;
     public int CarNumber;
@@ -57,8 +57,8 @@ class Service
 public abstract class Depot
 {
     public string Title;
-    public List<string> WorkList; 
-    public Depot(string depotTitle, List<string> depotWorkList)
+    public List<Service> WorkList; 
+    public Depot(string depotTitle, List<Service> depotWorkList)
     {
         Title = depotTitle;
         WorkList = depotWorkList;
@@ -68,16 +68,16 @@ public abstract class Depot
 public class CarDepot : Depot
 {
     public readonly int Capacity;
-    public CarDepot(string depotTitle, List<string> depotWorkList, int depotCapacity) : base(depotTitle, depotWorkList)
+    public CarDepot(string depotTitle, List<Service> depotWorkList, int depotCapacity) : base(depotTitle, depotWorkList)
     {
         Capacity = depotCapacity;
     }
     public override string GetInfo()
     {
         string list = "";
-        foreach (string element in WorkList)
+        foreach (Service element in WorkList)
         {
-            list += $"{element}\n";
+            list += $"{element.WorkDescription}\n";
         }
         return $"Название депо: {Title}" +$"\nСписок работ: {list}" + $"Вместимость депо: {Capacity}";
     }
@@ -90,7 +90,7 @@ public enum LocoType
 public class LocomotiveDepot : Depot
 {
     public LocoType Locomotive;
-    public LocomotiveDepot(string depotTitle, List<string> depotWorkList, LocoType locoType) : base(depotTitle, depotWorkList)
+    public LocomotiveDepot(string depotTitle, List<Service> depotWorkList, LocoType locoType) : base(depotTitle, depotWorkList)
     {
         Locomotive = locoType;
     }
@@ -106,7 +106,7 @@ public class LocomotiveDepot : Depot
             carType = "тепловоз";
         }
         string list = "";
-        foreach (string element in WorkList)
+        foreach (Service element in WorkList)
         {
             list += $"{element}\n";
         }

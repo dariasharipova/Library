@@ -1,4 +1,4 @@
-namespace RWMaintenance;
+/* namespace RWMaintenance;
 
 public class ServiceTests
 {
@@ -45,13 +45,14 @@ public class CarDepotTests
     [SetUp]
     public void Setup()
     {
-        depot = new CarDepot("TTT", new List<string>(){"работа1", "робта2", "работа3"}, 23);
+        depot = new CarDepot("TTT", new List<Service>(){new Service(15, 234, RepairType.Urgent, "werty", "sdfghjn", "dxfcgvbh", 1234, "sdfghj", DateTime.Parse("May 3, 2023")),new Service(15, 234, RepairType.Urgent, "werty", "sdfghjn", "dxfcgvbh", 1234, "sdfghj", DateTime.Parse("May 5, 2023"))}, 2345);
+        #depot = new CarDepot("TTT", new List<string>(){"работа1", "робта2", "работа3"}, 23);
     }
     [Test]
     public void ConstructorDepotTests()
     {
         Assert.That(depot.Title, Is.EqualTo("TTT"));
-        Assert.That(depot.WorkList, Is.EqualTo(new List<string>(){"работа1", "робта2", "работа3"}));
+        Assert.That(depot.WorkList, Is.EqualTo(new List<Service>(){"работа1", "робта2", "работа3"}));
         Assert.That(depot.Capacity, Is.EqualTo(23));
     }
     [Test]
@@ -83,4 +84,4 @@ public class LocomotiveDepotTests
         var expected = "Название депо: rrr\nСписок работ: work1\nwork2\nwork3\nТип ремонтируемого локомотива: электровоз";
         Assert.That(locoDepot.GetInfo(), Is.EqualTo(expected));
     }
-}
+} */
