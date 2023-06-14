@@ -4,7 +4,7 @@ Service1 = new Service(13, 342, RepairType.Urgent, "Олег", "Карпов", "
 Console.WriteLine(Service1.GetInfo());
 Console.WriteLine();
 CarDepot CarDepot1;
-CarDepot1 = new CarDepot("TTT", new List<Service>(){new Service(15, 234, RepairType.Urgent, "werty", "sdfghjn", "dxfcgvbh", 1234, "sdfghj", DateTime.Parse("May 3, 2023")), new Service(345, 234, RepairType.Prevention, "werty", "sdfghjn", "dxfcgvbh", 1234, "rth", DateTime.Parse("May 5, 2023")), Service1}, 23);
+CarDepot1 = new CarDepot("TTT", new List<Service>(){new Service(13, 342, RepairType.Urgent, "Олег", "Карпов", "ПЕтрович", 1234.4, "FWE", DateTime.Parse("April 2, 2023")), new Service(15, 234, RepairType.Urgent, "Алексей", "Смирнов", "Генадьевич", 1234, "sdfghj", DateTime.Parse("May 3, 2023")), new Service(178, 12, RepairType.Prevention, "Виктор", "Лукьянов", "Дмитреевич", 12904, "fdghasf", DateTime.Parse("May 5, 2023"))}, 23);
 Console.WriteLine(CarDepot1.GetInfo());
 Console.WriteLine();
 LocomotiveDepot LocomotiveDepot1;

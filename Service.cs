@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+
 namespace RWMaintenance;
 public enum RepairType
 {
@@ -61,7 +63,14 @@ public class Service: IComparable<Service>
         return $"Номер заявки: {ServiceNumber}\nНомер вагона: {CarNumber}\nТип ремонта: {repair}\nФИО сотрудника, отвественного за произведение работ: {EmployeeSurname} {EmployeeName} {EmployeePatronymic}\nСтоимость работ: {WorkCost}\nОписание работ: {WorkDescription}\nДата начала работ: {StartDate}\nДата завершения работ: {EndDate}\nПродолжительность работ: {Duration.Days} дней";
     }
 }
-public abstract class Depot
+public class CarNumberComparer: IComparer<Service>
+{
+    public int Compare(Service one, Service two)
+    {
+        return (int)two.CarNumber - (int)one.CarNumber;
+    }
+}
+public abstract class Depot: IEnumerable<Service>
 {
     public string Title;
     public List<Service> WorkList; 
@@ -72,7 +81,7 @@ public abstract class Depot
         WorkList.Sort();
     }
     public IEnumerator<Service> GetEnumerator() => WorkList.GetEnumerator();
-    // IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public abstract string GetInfo();
 }
 public class CarDepot : Depot
@@ -91,7 +100,7 @@ public class CarDepot : Depot
         {
             list += $"{element.WorkDescription}\n";
         }
-        return $"Название депо: {Title}\nСписок работ: {list}\nВместимость депо: {Capacity}\nКоличество вагонов на ремонте: {CarCount}";
+        return $"Название депо: {Title}\nСписок работ: {list}Вместимость депо: {Capacity}\nКоличество вагонов на ремонте: {CarCount}";
     }
 }
 public enum LocoType
@@ -120,7 +129,7 @@ public class LocomotiveDepot : Depot
         string list = "";
         foreach (Service element in WorkList)
         {
-            list += $"{element}\n";
+            list += $"{element.WorkDescription}\n";
         }
         return $"Название депо: {Title}" +$"\nСписок работ: {list}" + $"Тип ремонтируемого локомотива: {carType}";
     }
